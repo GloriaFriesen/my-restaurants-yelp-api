@@ -25,12 +25,12 @@ public class MainActivityInstrumentationTest {
                 .check(matches(withText("97214")));
     }
 
-    @Test
-    public void locationIsSentToRestaurantsActivity() {
-        String zip = "97214";
-        onView(withId(R.id.enterZip)).perform(typeText(zip));
-        onView(withId(R.id.emberButton)).perform(click());
-        onView(withId(R.id.locationTextView)).check(matches
-                (withText("Yo, dawg. Here are all the donuts near "  + zip)));
-    }
+//    @Test
+//    public void locationIsSentToRestaurantsActivity() {
+//        String zip = "97214";
+//        onView(withId(R.id.enterZip)).perform(typeText(zip));
+//        onView(withId(R.id.emberButton)).perform(click());
+//        onView(withId(R.id.locationTextView)).check(matches
+//                (withText("Yo, dawg. Here are all the donuts near "  + zip)));
+//    }
 }
