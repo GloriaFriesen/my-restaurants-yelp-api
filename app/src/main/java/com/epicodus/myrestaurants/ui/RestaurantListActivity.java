@@ -26,8 +26,8 @@ import okhttp3.Response;
 
 public class RestaurantListActivity extends AppCompatActivity {
     public static final String TAG = RestaurantListActivity.class.getSimpleName();
-    private SharedPreferences mSharedPreferences;
-    private String mRecentAddress;
+//    private SharedPreferences mSharedPreferences;
+//    private String mRecentAddress;
 
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
@@ -45,12 +45,11 @@ public class RestaurantListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
-        if (mRecentAddress != null) {
-            getRestaurants(mRecentAddress);
-        }
-        Log.d("Shared Preference", mRecentAddress);
+//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+//        if (mRecentAddress != null) {
+//            getRestaurants(mRecentAddress);
+//        }
 
         getRestaurants(location);
     }
