@@ -25,39 +25,12 @@ import butterknife.ButterKnife;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-//    private SharedPreferences mSharedPreferences;
-//    private SharedPreferences.Editor mEditor;
-
-    private DatabaseReference mSearchedLocationReference;
-    private ValueEventListener mSearchedLocationReferenceListener;
-
     @Bind(R.id.emberButton) Button mEmberButton;
-    @Bind(R.id.enterZip) EditText mZipEditText;
     @Bind(R.id.myRestaurantsTextView) TextView mMyRestaurantsTextView;
     @Bind(R.id.savedRestaurantsButton) Button mSavedRestaurantsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mSearchedLocationReference = FirebaseDatabase
-                .getInstance()
-                .getReference()
-                .child(Constants.FIREBASE_CHILD_SEARCHED_LOCATION);
-
-        mSearchedLocationReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot locationSnapshot : dataSnapshot.getChildren()){
-                    String location = locationSnapshot.getValue().toString();
-                    Log.d("Locations updated", "location: " + location);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -67,27 +40,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Typeface pacificoFont = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
         mMyRestaurantsTextView.setTypeface(pacificoFont);
-
-//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        mEditor = mSharedPreferences.edit();
-    }
-
-    @Override
-    protected void onDestroy(){
-        super.onDestroy();
-        mSearchedLocationReference.removeEventListener(mSearchedLocationReferenceListener);
     }
 
     @Override
     public void onClick(View v) {
         if (v == mEmberButton) {
-            String location = mZipEditText.getText().toString();
-            saveLocationToFirebase(location);
-//            if (!(location).equals("")) {
-//                addToSharedPreferences(location);
-//            }
             Intent intent = new Intent(MainActivity.this, RestaurantListActivity.class);
-            intent.putExtra("location", location);
             startActivity(intent);
         }
         if (v == mSavedRestaurantsButton) {
@@ -95,12 +53,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
     }
-
-    public void saveLocationToFirebase(String location){
-        mSearchedLocationReference.push().setValue(location);
-    }
-
-//    private void addToSharedPreferences(String location) {
-//        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
-//    }
 }
