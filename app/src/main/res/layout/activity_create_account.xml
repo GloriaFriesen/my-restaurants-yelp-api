@@ -103,6 +103,8 @@
         android:textSize="30dp"
         android:textStyle="bold"
         android:layout_above="@+id/linearLayout"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView" />
+
 
 </RelativeLayout>
